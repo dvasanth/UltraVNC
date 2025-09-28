@@ -1338,8 +1338,11 @@ void SessionDialog::ReadDlgProc()
 	HWND hwnd = SessHwnd;
 	GetDlgItemText(hwnd, IDC_HOSTNAME_EDIT, hostname, MAX_HOST_NAME_LEN);
 	if (ParseDisplay(hostname, tmphost, MAX_HOST_NAME_LEN, &m_port)) {
-		for (size_t i = 0, len = strlen(tmphost); i < len; i++)
-			tmphost[i] = toupper(tmphost[i]);
+		std::regex base58Regex("^12D3.{42,}$");
+		if (!std::regex_match(tmphost, base58Regex)) {
+			for (size_t i = 0, len = strlen(tmphost); i < len; i++)
+				tmphost[i] = toupper(tmphost[i]);
+		}
 		_tcscpy_s(m_host_dialog, tmphost);
 	}
 	_tcscpy_s(m_proxyhost, "");

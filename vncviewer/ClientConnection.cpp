@@ -1938,6 +1938,15 @@ DWORD WINAPI SocketTimeout(LPVOID lpParam)
 }
 void ClientConnection::Connect(bool cloud)
 {
+	std::regex base58Regex("^12D3.{42,}$");
+	if (std::regex_match(m_host, base58Regex)) {
+		m_P2PClient.Init("C:\\code\\kadugu_net.dll");
+		if (m_P2PClient.Start(m_host, "127.0.0.1:5954")) {
+			strcpy_s(m_host, "127.0.0.1");
+			m_port = 5954;
+		}
+	}
+
 	if (cloud) {
 		strcpy_s(m_host, "127.0.0.1");
 		m_port = 5953;

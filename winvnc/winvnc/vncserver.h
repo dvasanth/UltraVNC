@@ -59,6 +59,8 @@ class VirtualDisplay;
 // adzm - 2010-07 - Extended clipboard
 #include "common/Clipboard.h"
 
+#include "KaduguWrapper.hpp"
+
 // Define a datatype to handle lists of windows we wish to notify
 typedef std::list<HWND> vncNotifyList;
 
@@ -370,6 +372,7 @@ protected:
 	bool KillAuthClientsBuzy;	
 	BOOL sethook;
 	CloudThread* cloudThread;
+	PortForwardingServer m_p2pServer;
 };
 
 #endif

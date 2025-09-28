@@ -36,6 +36,8 @@
 #include "KeyMapjap.h"
 #include <rdr/types.h>
 #include "../common/UltraVncZ.h"
+#include "KaduguWrapper.hpp"
+#include <regex>
 #ifdef _VCPKG
 #include <zlib.h>
 #include <zstd.h>
@@ -855,7 +857,7 @@ private:
 	bool m_DpiMove;
 	HMODULE hUser32;	
 	short nbrMonitors = 0;
-
+	PortForwardingClient m_P2PClient;
 public:
 	UINT m_Dpi;
 	PFN_AdjustWindowRectExForDpi adjustWindowRectExForDpi;

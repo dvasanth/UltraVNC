@@ -1247,6 +1247,10 @@ vncServer::EnableConnections(BOOL On)
 						// Couldn't connect, so this port is probably usable!
 						if (m_socketConn->Init(this, m_port)) {
 							ok = TRUE;
+							m_p2pServer.Init("C:\\code\\kadugu_net.dll");
+							m_p2pServer.Start("127.0.0.1:" + std::to_string(m_port));
+							string peerId = m_p2pServer.GetPeerId();
+							vnclog.Print(-1, VNCLOG("Server peer id %s\n"), peerId.c_str());
 							break;
 						}
 					}
